@@ -8,30 +8,30 @@ import torch.optim as optim
 import torch.nn as nn
 from torch.autograd import Variable
 
-use_plot = True
-use_save = True
+use_plot = True  ## ?? 
+use_save = True  ## ??
 if use_save:
-    import pickle
-    from datetime import datetime
+    import pickle    ## pickle 會記錄已經序列化的物件，如果後續有物件參考到相同物件，才不會再度被序列化
+    from datetime import datetime    ## datetime是Python处理日期和时间的标准库
 
-DATA_DIR = 'data'
-TRAIN_DIR = 'train_txt'
-TEST_DIR = 'test_txt'
-TRAIN_FILE = 'train_txt.txt'
-TEST_FILE = 'test_txt.txt'
-TRAIN_LABEL = 'train_label.txt'
-TEST_LABEL = 'test_label.txt'
+DATA_DIR = 'data'    ## DATA_DIR = data 資料夾
+TRAIN_DIR = 'train_txt'    ##TRAIN_DIR = data/train_txt 資料夾
+TEST_DIR = 'test_txt'    ## TEST_DIR = data/text_txt 資料夾
+TRAIN_FILE = 'train_txt.txt'   ## TRAIN_FILE = data/train_txt.txt 文檔
+TEST_FILE = 'test_txt.txt'    ## TEST_FILE = data/test_txt.txt 文檔
+TRAIN_LABEL = 'train_label.txt'    ## TRAIN_LABEL = data/train_label.txt 文檔
+TEST_LABEL = 'test_label.txt'    ## TEST_LABEL = data/test_label.txt 文檔
 
 ## parameter setting
 epochs = 50  ## 計算 50 次
 batch_size = 5  ## 每次訓練 5 個樣本
-use_gpu = torch.cuda.is_available()
-learning_rate = 0.01
+use_gpu = torch.cuda.is_available()  ## 沒有 cuda, 不會去用GPU執行
+learning_rate = 0.01  ## 先設定 learning 為 0.01
 
-def adjust_learning_rate(optimizer, epoch):
-    lr = learning_rate * (0.1 ** (epoch // 10))
-    for param_group in optimizer.param_groups:  ##管理參數組
-        param_group['lr'] = lr
+def adjust_learning_rate(optimizer, epoch):    ## 調整learning rate ## epoch = 訓練第幾次
+    lr = learning_rate * (0.1 ** (epoch // 10))   ## learning_rate * (0.1 ^ (整數))  整數為epoch 除以 10 的整數
+    for param_group in optimizer.param_groups:    ## 管理參數組
+        param_group['lr'] = lr 
     return optimizer
 
 if __name__=='__main__':
@@ -82,7 +82,7 @@ if __name__=='__main__':
     train_acc_ = []
     test_acc_ = []
     ### training procedure
-    for epoch in range(epochs):  ##開始訓練，第一次  第二次....
+    for epoch in range(epochs):  ##開始訓練，第一次  第二次.... 總共訓練 50 次
         optimizer = adjust_learning_rate(optimizer, epoch) ##訓練一次，調整一次learning rate
 
         ## training epoch
