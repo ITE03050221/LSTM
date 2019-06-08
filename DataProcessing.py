@@ -12,7 +12,7 @@ class Dictionary(object):
     def add_word(self, word):  ##加入 word
         if word not in self.word2idx:  ## 如果 word 不在 dict 裡面 
             self.idx2word.append(word)  ## 將 此word 加到 list 裡面
-            self.word2idx[word] = len(self.idx2word) - 1  ## ??
+            self.word2idx[word] = len(self.idx2word) - 1  ## 
         return self.word2idx[word]
 
     def __len__(self):
